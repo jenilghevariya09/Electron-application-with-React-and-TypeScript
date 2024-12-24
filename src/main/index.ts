@@ -1,8 +1,8 @@
 import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import * as path from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
+import { loginRegister } from './auth'
 // import icon from '../../resources/icon.png?asset'
-import axios from 'axios'
 
 function createWindow(): void {
   // Create the browser window.
@@ -26,7 +26,7 @@ function createWindow(): void {
     shell.openExternal(details.url)
     return { action: 'deny' }
   })
-
+  loginRegister()
   // HMR for renderer base on electron-vite cli.
   // Load the remote URL for development or the local html file for production.
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
@@ -52,29 +52,6 @@ app.whenReady().then(() => {
 
   // IPC test
   ipcMain.on('ping', () => console.log('pong'))
-  ipcMain.on('fetchApi', async () => {
-    try {
-      console.log('fetchApi--------------------------------?')
-      const response = await axios.post(
-        'http://ctrade.jainam.in:3001/apimarketdata/auth/login',
-        {
-          appKey: '22100991eeb4ac8f602880',
-          secretKey: 'Rkfc546$9R',
-          source: 'WebAPI'
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        }
-      )
-      console.log('fetchApi--------------------------------?', response.data)
-      return response.data
-    } catch (error) {
-      console.error('Error handling fetch-api:', error)
-      return null
-    }
-  })
 
   createWindow()
 
