@@ -4,7 +4,7 @@ import { AxiosResponse } from 'axios'
 const authenticateXts = async (): Promise<AxiosResponse> => {
   const response = await window.electron.ipcRenderer.invoke('login')
   console.log(response, 'new response')
-  return await response
+  return response
 }
 
 export const useXtsAuth = (): UseQueryResult => {
