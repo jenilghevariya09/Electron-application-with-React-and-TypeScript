@@ -1,11 +1,13 @@
 import Versions from './components/Versions'
 import electronLogo from './assets/electron.svg'
+import useXtsAuth from '../../main/useXtsAuth'
 
 function App(): JSX.Element {
+  const { data, refetch } = useXtsAuth()
+
   const fetchData = async (): Promise<void> => {
     try {
-      const data = await window.electron.ipcRenderer.send('fetchApi')
-      console.log('Data from API:', data)
+      refetch()
     } catch (error) {
       console.error('Error fetching data:', error)
     }

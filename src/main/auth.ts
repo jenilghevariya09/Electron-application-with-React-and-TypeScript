@@ -5,7 +5,7 @@ import { login } from './login' // use this for direct login
 
 const loginRegister = async (): Promise<void> => {
   try {
-    ipcMain.on('fetchApi', async () => {
+    ipcMain.handle('login', async () => {
       try {
         console.log('Handling login request...')
         // const response = await useXtsAuth()  //use this for react query
