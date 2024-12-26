@@ -2,10 +2,11 @@
 import { ipcMain } from 'electron'
 // import { useXtsAuth } from './useXtsAuth' // use this for react query
 import { login } from './login' // use this for direct login
+import { AxiosResponse } from 'axios'
 
-const loginRegister = async (): Promise<void> => {
+const loginRegister = async (): Promise<AxiosResponse> => {
   try {
-    ipcMain.on('fetchApi', async () => {
+    ipcMain.handle('login', async () => {
       try {
         console.log('Handling login request...')
         // const response = await useXtsAuth()  //use this for react query

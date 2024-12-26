@@ -1,20 +1,9 @@
 import { useQuery, UseQueryResult } from '@tanstack/react-query'
-import axios, { AxiosResponse } from 'axios'
+import { AxiosResponse } from 'axios'
 
 const authenticateXts = async (): Promise<AxiosResponse> => {
-  const response = await axios.post(
-    'http://ctrade.jainam.in:3001/apimarketdata/auth/login',
-    {
-      appKey: '22100991eeb4ac8f602880',
-      secretKey: 'Rkfc546$9R',
-      source: 'WebAPI'
-    },
-    {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }
-  )
+  const response = await window.electron.ipcRenderer.invoke('login')
+  console.log(response, 'new response')
   return response
 }
 

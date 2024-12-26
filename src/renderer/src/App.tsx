@@ -1,5 +1,6 @@
 import Versions from './components/Versions'
 import electronLogo from './assets/electron.svg'
+import { useXtsAuth } from './useXtsAuth'
 
 function App(): JSX.Element {
   const fetchData = async (): Promise<void> => {
@@ -10,6 +11,7 @@ function App(): JSX.Element {
       console.error('Error fetching data:', error)
     }
   }
+  useXtsAuth()
 
   return (
     <>
